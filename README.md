@@ -1,0 +1,1 @@
+GUI Morse Code System is a Python Project which can read and write Morse code from text and even transmit them through sound and even can receive Morse code through mic. Also it will be an GUI Project so it will be awesome.
