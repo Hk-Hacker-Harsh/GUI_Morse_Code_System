@@ -386,8 +386,11 @@ win = Tk()
 win.geometry('600x350')
 win.resizable(0,0)
 
-image = PhotoImage(file="img.png")
-win.iconphoto(True, image)
+try:
+    img = PhotoImage(file='img.png')
+    win.iconphoto(True, img)
+except Exception as e:
+    pass
 
 win.config(background="LightBlue")
 win.title("Morse System")

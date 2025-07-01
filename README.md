@@ -71,6 +71,8 @@ Now you can click "Play Morse" to play morse sound or click "Clear" to Convert a
 5. It will open a New Window with two options "Dot" and "Dash", Dot will make sound of Short Beep, while Dash make sound of Long Beep.
 ![Manual Morse](Images/1.5.png)
 
+## Demo Video : [Demo Video](/Demo/Demo.mp4)
+## EXE File : [Exe File](/Demo/GUI_Morse_Code_System.exe)
 
 ## 🤝 Contributing
 
