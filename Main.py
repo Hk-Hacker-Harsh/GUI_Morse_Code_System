@@ -4,24 +4,34 @@ from tkinter import messagebox
 import winsound                                    #Beep Sound
 import time
 import webbrowser
+import threading
 
 
 #Def
+stop_morse = False
+
 def playmorse():
-    for i in morse.get(1.0,END):
+    global stop_morse
+    stop_morse = False
+    for i in morse.get(1.0, END):
+        if stop_morse:
+            break
         if i == '1':
-            winsound.Beep(2500,550)
+            winsound.Beep(2500, 550)
         elif i == '0':
-            winsound.Beep(2500,200)
+            winsound.Beep(2500, 200)
         elif i == " ":
             time.sleep(2)
         elif i == "/":
             time.sleep(3)
-        else:
-            break
- 
+
+def stop_playing():
+    global stop_morse
+    stop_morse = True
+
 def reset():
     playbut.config(state=DISABLED)
+    stopbut.config(state=DISABLED)
     proceed.config(state=NORMAL, background="white")
     morse.config(state=NORMAL, background="white")
     txt.config(state=NORMAL, background="white")
@@ -30,6 +40,7 @@ def reset():
 
 def convert():
     playbut.config(state=ACTIVE)
+    stopbut.config(state=ACTIVE)
     proceed.config(state=DISABLED, background="lightgrey")
     morse.config(state=DISABLED, background="lightgrey")
     txt.config(state=DISABLED, background="lightgrey")
@@ -408,8 +419,11 @@ proceed.place(x=300,y=250,anchor="center")
 clear=Button(win,text="Clear",width=8,command=reset)
 clear.place(x=300,y=280,anchor="center")
 
-playbut=Button(win,text="Play Morse",command=playmorse, font=("",10,""), state=DISABLED)
-playbut.place(x=550,y=300, anchor="e")
+playbut=Button(win,text="Play Morse",command=lambda: threading.Thread(target=playmorse, daemon=True).start(), font=("",10,""), state=DISABLED)
+playbut.place(x=550,y=285, anchor="e")
+
+stopbut=Button(win,text="Stop Morse",command=stop_playing, font=("",10,""), state=DISABLED)
+stopbut.place(x=550,y=325, anchor="e")
 
 About = Button(win, text="About Me", font=("",10,""),command=about)
 About.place(x=50,y=300, anchor="w")
